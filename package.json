@@ -1,0 +1,13 @@
+{
+  "name": "vera-backend",
+  "version": "1.0.0",
+  "description": "VERA — Backend Vercel Serverless",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.36.0",
+    "formidable": "^3.5.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
