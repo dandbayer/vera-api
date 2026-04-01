@@ -1,8 +1,8 @@
 // api/generate-image.js — Vercel Serverless Function
-// Recebe prompt, chama Ideogram API, retorna URL da imagem
+// Gera imagem no Ideogram, baixa server-side e retorna como base64
+// Isso elimina CORS e o problema de URLs efêmeras que expiram
 
 export default async function handler(req, res) {
-  // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     const { prompt } = req.body;
     if (!prompt) return res.status(400).json({ error: 'Prompt obrigatório' });
 
+    // 1. Gera a imagem no Ideogram
     const ideogramRes = await fetch('https://api.ideogram.ai/generate', {
       method: 'POST',
       headers: {
@@ -22,7 +23,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         image_request: {
           prompt: prompt,
-          aspect_ratio: 'ASPECT_1_1',   // Feed — depois renderizamos stories via canvas crop
+          aspect_ratio: 'ASPECT_1_1',
           model: 'V_2_TURBO',
           magic_prompt_option: 'AUTO',
           style_type: 'REALISTIC',
@@ -32,7 +33,7 @@ export default async function handler(req, res) {
 
     if (!ideogramRes.ok) {
       const errText = await ideogramRes.text();
-      console.error('Ideogram error:', errText);
+      console.error('Ideogram generate error:', errText);
       return res.status(502).json({ error: 'Ideogram API error', detail: errText });
     }
 
@@ -43,14 +44,42 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'Sem URL na resposta do Ideogram', raw: data });
     }
 
-    // Retorna a imagem via proxy para evitar bloqueio de CORS no browser
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:3000';
+    // 2. Baixa a imagem server-side (sem restrição de CORS)
+    // Tenta primeiro sem Api-Key, depois com
+    let imgRes = await fetch(imageUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; VERA/1.0)',
+        'Accept': 'image/png,image/webp,image/*,*/*',
+      }
+    });
 
-    const proxiedUrl = `${baseUrl}/api/proxy-image?url=${encodeURIComponent(imageUrl)}`;
+    if (!imgRes.ok) {
+      // Segunda tentativa com autenticação
+      imgRes = await fetch(imageUrl, {
+        headers: {
+          'Api-Key': process.env.IDEOGRAM_API_KEY,
+          'User-Agent': 'Mozilla/5.0 (compatible; VERA/1.0)',
+          'Accept': 'image/png,image/webp,image/*,*/*',
+        }
+      });
+    }
 
-    return res.status(200).json({ url: proxiedUrl });
+    if (!imgRes.ok) {
+      console.error('Falha ao baixar imagem:', imgRes.status, imgRes.statusText);
+      return res.status(502).json({
+        error: 'Não foi possível baixar a imagem gerada',
+        httpStatus: imgRes.status,
+        imageUrl
+      });
+    }
+
+    const contentType = imgRes.headers.get('content-type') || 'image/png';
+    const buffer = await imgRes.arrayBuffer();
+    const base64 = Buffer.from(buffer).toString('base64');
+    const dataUrl = `data:${contentType};base64,${base64}`;
+
+    // 3. Retorna como data URL — sem CORS, sem expiração, pronto para o canvas
+    return res.status(200).json({ url: dataUrl });
 
   } catch (err) {
     console.error('Generate image error:', err);
