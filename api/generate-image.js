@@ -43,7 +43,14 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'Sem URL na resposta do Ideogram', raw: data });
     }
 
-    return res.status(200).json({ url: imageUrl });
+    // Retorna a imagem via proxy para evitar bloqueio de CORS no browser
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000';
+
+    const proxiedUrl = `${baseUrl}/api/proxy-image?url=${encodeURIComponent(imageUrl)}`;
+
+    return res.status(200).json({ url: proxiedUrl });
 
   } catch (err) {
     console.error('Generate image error:', err);
