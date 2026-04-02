@@ -68,21 +68,7 @@ BRIEFING DO CLIENTE:
 - Tom de voz: ${TONE_MAP[tone] || tone}
 - Objetivo: ${GOAL_MAP[goal] || goal}
 - Tema/Produto do post: ${theme}
-${imageContent ? '- Imagem de referência visual fornecida.
-
-ANÁLISE OBRIGATÓRIA DA IMAGEM DE REFERÊNCIA — faça mentalmente antes de escrever qualquer coisa:
-1. PALETA: Quais são as 2-3 cores dominantes? Quais são os tons de apoio? A paleta é quente, fria ou neutra?
-2. CONTRASTE: O design é de alto impacto (cores saturadas, contrastes fortes) ou refinado (tons suaves, baixo contraste)?
-3. GEOMETRIA: O estilo é orgânico e fluido ou geométrico e estruturado? Há padrões, texturas ou grafismos?
-4. ILUMINAÇÃO: A luz é dramática e direcional, difusa e suave, ou flat e gráfica?
-5. ENERGIA: Em uma palavra, qual emoção a identidade visual evoca? (ex: força, elegância, alegria, urgência, confiança)
-6. PERSONALIDADE: A marca grita ou sussurra? É popular ou exclusiva? Jovem ou madura?
-7. PRODUTO VISUAL: O produto/serviço deste cliente tem apelo visual intrínseco? Avalie:
-   - SIM (automotivo, alimentação, estética, moda, construção, saúde visual): o produto PODE aparecer no fundo, mas de forma estilizada, parcial, atmosférica ou como textura — nunca como foto de catálogo centralizada
-   - NÃO (contabilidade, RH, consultoria, tecnologia abstrata, jurídico): use apenas atmosfera, paleta e grafismos — o produto não aparece
-
-USE essas respostas como DNA do imagePrompt.
-IGNORE completamente: a composição específica da imagem de referência, objetos em primeiro plano, textos e logos que aparecem nela — eles não existem para este exercício. Extraia apenas estética, nunca estrutura.' : ''}
+${imageContent ? '- Imagem de referência visual fornecida (use para entender a paleta e estilo)' : ''}
 
 ENTREGUE obrigatoriamente um JSON válido com EXATAMENTE estas chaves (sem markdown, sem texto extra):
 
@@ -96,12 +82,12 @@ ENTREGUE obrigatoriamente um JSON válido com EXATAMENTE estas chaves (sem markd
   "copyStories": "Headline para stories (mais curto, direto)\nTexto de apoio (1 linha)\nCTA stories (ex: 'Arrasta pra cima 👆')",
   "captionFeed": "Legenda completa para o feed (3-5 parágrafos, com emojis, hashtags no final, CTA claro)",
   "captionStories": "Legenda/texto de apoio para stories (curta, máx 3 linhas, tom direto)",
-  "imagePrompt": "imagePrompt": "Prompt em inglês para Ideogram. Você é um diretor de arte sênior criando o fundo de um post para redes sociais. Com base na análise de DNA visual da referência, descreva uma cena de fundo que: (1) traduza fielmente a paleta, energia e personalidade da marca, (2) seja completamente abstrata ou ambiental — sem produtos, sem objetos reconhecíveis do negócio, sem ingredientes, sem pessoas com rosto, sem texto, sem logo, (3) use vocabulário de direção de arte: tipo de luz, textura, composição, profundidade, saturação, mood. Exemplos do que é CORRETO: 'deep crimson background with radial golden light burst, high contrast, bold graphic energy, warm cinematic glow' — Exemplos do que é ERRADO: 'salmon fillet with passion fruit' ou 'hamburger with flying tomatoes'. O fundo evoca a marca — nunca a ilustra literalmente. Máx 120 palavras."
+  "imagePrompt": "Prompt em inglês para gerador de imagem AI (Ideogram). Descreva: estilo visual, cores dominantes, composição, mood, elementos principais. Evite rostos. Foco em: atmosfera, textura, abstrato ou ambiente. Máx 200 palavras."
 }
 
 IMPORTANTE: 
 - copyFeed e copyStories usam \\n para quebra de linha
-- imagePrompt: o fundo é cenário de cinema, não vitrine de produto — evoca a marca pelo estilo, nunca pelo conteúdo
+- imagePrompt deve ser uma cena de fundo impactante, sem texto, sem logo, sem pessoas com rosto nítido
 - Responda SOMENTE o JSON, sem nenhum texto antes ou depois
     `.trim();
 
