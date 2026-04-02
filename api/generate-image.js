@@ -1,6 +1,5 @@
 // api/generate-image.js — Vercel Serverless Function
 // Gera imagem no Ideogram, baixa server-side e retorna como base64
-// Isso elimina CORS e o problema de URLs efêmeras que expiram
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
