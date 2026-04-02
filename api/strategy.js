@@ -68,7 +68,21 @@ BRIEFING DO CLIENTE:
 - Tom de voz: ${TONE_MAP[tone] || tone}
 - Objetivo: ${GOAL_MAP[goal] || goal}
 - Tema/Produto do post: ${theme}
-${imageContent ? '- Imagem de referência visual fornecida (use para entender a paleta e estilo)' : ''}
+${imageContent ? '- Imagem de referência visual fornecida.
+
+ANÁLISE OBRIGATÓRIA DA IMAGEM DE REFERÊNCIA — faça mentalmente antes de escrever qualquer coisa:
+1. PALETA: Quais são as 2-3 cores dominantes? Quais são os tons de apoio? A paleta é quente, fria ou neutra?
+2. CONTRASTE: O design é de alto impacto (cores saturadas, contrastes fortes) ou refinado (tons suaves, baixo contraste)?
+3. GEOMETRIA: O estilo é orgânico e fluido ou geométrico e estruturado? Há padrões, texturas ou grafismos?
+4. ILUMINAÇÃO: A luz é dramática e direcional, difusa e suave, ou flat e gráfica?
+5. ENERGIA: Em uma palavra, qual emoção a identidade visual evoca? (ex: força, elegância, alegria, urgência, confiança)
+6. PERSONALIDADE: A marca grita ou sussurra? É popular ou exclusiva? Jovem ou madura?
+7. PRODUTO VISUAL: O produto/serviço deste cliente tem apelo visual intrínseco? Avalie:
+   - SIM (automotivo, alimentação, estética, moda, construção, saúde visual): o produto PODE aparecer no fundo, mas de forma estilizada, parcial, atmosférica ou como textura — nunca como foto de catálogo centralizada
+   - NÃO (contabilidade, RH, consultoria, tecnologia abstrata, jurídico): use apenas atmosfera, paleta e grafismos — o produto não aparece
+
+USE essas respostas como DNA do imagePrompt.
+IGNORE completamente: a composição específica da imagem de referência, objetos em primeiro plano, textos e logos que aparecem nela — eles não existem para este exercício. Extraia apenas estética, nunca estrutura.' : ''}
 
 ENTREGUE obrigatoriamente um JSON válido com EXATAMENTE estas chaves (sem markdown, sem texto extra):
 
