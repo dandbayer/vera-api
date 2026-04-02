@@ -68,28 +68,14 @@ BRIEFING DO CLIENTE:
 - Tom de voz: ${TONE_MAP[tone] || tone}
 - Objetivo: ${GOAL_MAP[goal] || goal}
 - Tema/Produto do post: ${theme}
-${imageContent ? '- Imagem de referência visual fornecida.
-
-(ANÁLISE OBRIGATÓRIA DA IMAGEM DE REFERÊNCIA — faça mentalmente antes de escrever qualquer coisa:
-1. PALETA: Quais são as 2-3 cores dominantes? Quais são os tons de apoio? A paleta é quente, fria ou neutra?
-2. CONTRASTE: O design é de alto impacto (cores saturadas, contrastes fortes) ou refinado (tons suaves, baixo contraste)?
-3. GEOMETRIA: O estilo é orgânico e fluido ou geométrico e estruturado? Há padrões, texturas ou grafismos?
-4. ILUMINAÇÃO: A luz é dramática e direcional, difusa e suave, ou flat e gráfica?
-5. ENERGIA: Em uma palavra, qual emoção a identidade visual evoca? (ex: força, elegância, alegria, urgência, confiança)
-6. PERSONALIDADE: A marca grita ou sussurra? É popular ou exclusiva? Jovem ou madura?
-7. PRODUTO VISUAL: O produto/serviço deste cliente tem apelo visual intrínseco? Avalie:
-   - SIM (automotivo, alimentação, estética, moda, construção, saúde visual): o produto PODE aparecer no fundo, mas de forma estilizada, parcial, atmosférica ou como textura — nunca como foto de catálogo centralizada
-   - NÃO (contabilidade, RH, consultoria, tecnologia abstrata, jurídico): use apenas atmosfera, paleta e grafismos — o produto não aparece
-
-USE essas respostas como DNA do imagePrompt.
-IGNORE completamente: a composição específica da imagem de referência, objetos em primeiro plano, textos e logos que aparecem nela — eles não existem para este exercício. Extraia apenas estética, nunca estrutura.)' : ''}
+${imageContent ? '- Imagem de referência visual fornecida. (usada para extrair cores e estilo)' : ''}
 
 ENTREGUE obrigatoriamente um JSON válido com EXATAMENTE estas chaves (sem markdown, sem texto extra):
 
 {
   "positioning": "1-2 frases sobre o posicionamento estratégico da marca para este post",
   "bestTime": "Melhor horário para postar (dia da semana + horário + justificativa breve)",
-  "hashtags": "30 hashtags relevantes misturando populares e de nicho, separadas por espaço",
+  "hashtags": "10 hashtags relevantes misturando populares e de nicho, separadas por espaço",
   "toneApplied": "Como o tom foi aplicado na copy (1 frase)",
   "tip": "1 dica estratégica extra para maximizar o alcance deste post",
   "copyFeed": "Headline principal do post feed (máx 12 palavras, impactante)\nSubtítulo ou complemento (1 linha)\nCall-to-action (1 linha curta)",
