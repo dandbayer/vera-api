@@ -70,7 +70,7 @@ BRIEFING DO CLIENTE:
 - Tema/Produto do post: ${theme}
 ${imageContent ? '- Imagem de referência visual fornecida.
 
-ANÁLISE OBRIGATÓRIA DA IMAGEM DE REFERÊNCIA — faça mentalmente antes de escrever qualquer coisa:
+(ANÁLISE OBRIGATÓRIA DA IMAGEM DE REFERÊNCIA — faça mentalmente antes de escrever qualquer coisa:
 1. PALETA: Quais são as 2-3 cores dominantes? Quais são os tons de apoio? A paleta é quente, fria ou neutra?
 2. CONTRASTE: O design é de alto impacto (cores saturadas, contrastes fortes) ou refinado (tons suaves, baixo contraste)?
 3. GEOMETRIA: O estilo é orgânico e fluido ou geométrico e estruturado? Há padrões, texturas ou grafismos?
@@ -82,7 +82,7 @@ ANÁLISE OBRIGATÓRIA DA IMAGEM DE REFERÊNCIA — faça mentalmente antes de es
    - NÃO (contabilidade, RH, consultoria, tecnologia abstrata, jurídico): use apenas atmosfera, paleta e grafismos — o produto não aparece
 
 USE essas respostas como DNA do imagePrompt.
-IGNORE completamente: a composição específica da imagem de referência, objetos em primeiro plano, textos e logos que aparecem nela — eles não existem para este exercício. Extraia apenas estética, nunca estrutura.' : ''}
+IGNORE completamente: a composição específica da imagem de referência, objetos em primeiro plano, textos e logos que aparecem nela — eles não existem para este exercício. Extraia apenas estética, nunca estrutura.)' : ''}
 
 ENTREGUE obrigatoriamente um JSON válido com EXATAMENTE estas chaves (sem markdown, sem texto extra):
 
